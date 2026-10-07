@@ -6,7 +6,8 @@ Start in the `MLFLOW-DVC` repository folder on Windows PowerShell. Keep the [Git
 
 ```powershell
 git status --short --branch
-git log --oneline -3
+git log --oneline -4
+git diff ea0c3a6 dc5c291 -- params.yaml metrics.json
 git show --stat HEAD
 ```
 
