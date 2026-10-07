@@ -9,6 +9,8 @@ The dataset has 1,025 source rows, including duplicate records. Training removes
 Clone [the repository](https://github.com/aryanvinju/MLFLOW-DVC) and run these commands from its root:
 
 ```powershell
+git clone https://github.com/aryanvinju/MLFLOW-DVC.git
+Set-Location MLFLOW-DVC
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 $env:DVC_SITE_CACHE_DIR = "$PWD\.dvc\site-cache"
@@ -37,6 +39,10 @@ Open <http://127.0.0.1:5000>, choose **Heart Disease Classification**, and compa
 Open the [Actions page](https://github.com/aryanvinju/MLFLOW-DVC/actions) and select **Heart disease ML pipeline**. Each push to `main`, or a manual **Run workflow**, checks out the Git version, installs dependencies, pulls the DVC data, runs training with MLflow, and uploads `metrics.json`, `dvc.lock`, the model, and the MLflow run files as an artifact named `heart-disease-run`.
 
 The Actions runner has its own MLflow database. Open the local UI for local runs; use the Actions artifact and job log to show the remote run.
+
+## Recreate both comparison runs on a fresh clone
+
+The quick start creates the current 200 tree run. To see a second run in your local MLflow UI, change `n_estimators` in `params.yaml` from `200` to `100`, run `.\.venv\Scripts\dvc.exe repro`, then change it back to `200` and run the command again. The committed baseline settings can be inspected with `git show ea0c3a6:params.yaml`. This local experiment changes the working tree; the existing commits remain available in Git history.
 
 ## Show DVC and a prediction
 
