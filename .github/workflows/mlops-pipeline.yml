@@ -29,7 +29,15 @@ jobs:
         shell: pwsh
         run: |
           python -m venv .venv
-          .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+          .\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+
+      - name: Run unit tests
+        shell: pwsh
+        run: .\.venv\Scripts\python.exe -m pytest -q
+
+      - name: Run Pylint
+        shell: pwsh
+        run: .\.venv\Scripts\python.exe -m pylint --persistent=n src tests
 
       - name: Fetch DVC versioned files
         shell: pwsh

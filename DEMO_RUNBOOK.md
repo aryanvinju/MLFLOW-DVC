@@ -15,7 +15,7 @@ Explain that the commits save the pipeline and parameter versions. Open `params.
 
 ## 2 Show GitHub Actions
 
-Open the Actions tab and select the latest **Heart disease ML pipeline** run. Open **Fetch DVC versioned files**, **Train and log to MLflow**, and **Show metrics and prediction** in its job log. At the bottom of the run page, show the `heart-disease-run` artifact, which includes the metrics, model, and MLflow files.
+Open the Actions tab and select the latest **Heart disease ML pipeline** run. Show the passing **Run unit tests** and **Run Pylint** steps, then open **Fetch DVC versioned files**, **Train and log to MLflow**, and **Show metrics and prediction**. At the bottom of the run page, show the `heart-disease-run` artifact, which includes the metrics, model, and MLflow files.
 
 If there is no recent run, use **Run workflow** on `main` and wait for the job to finish.
 

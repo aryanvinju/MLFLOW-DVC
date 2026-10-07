@@ -20,6 +20,14 @@ $env:DVC_NO_ANALYTICS = "1"
 .\.venv\Scripts\dvc.exe metrics show
 ```
 
+Before running the pipeline, you can run the same quality checks as GitHub Actions:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+.\.venv\Scripts\python.exe -m pytest -q
+.\.venv\Scripts\python.exe -m pylint --persistent=n src tests
+```
+
 `dvc pull` restores the dataset and current model from the small demo remote stored in this repository. The remote is kept in Git solely to make the classroom demo self-contained. A larger project would use separate storage such as S3 or another DVC remote.
 
 The training stage writes `metrics.json` and `artifacts/heart_model.joblib`. Each forced reproduction makes a fresh MLflow run in the local `mlflow_demo.db` database. The model output is a trusted local training artifact; do not load model files from an unknown source.
