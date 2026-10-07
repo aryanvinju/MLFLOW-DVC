@@ -1,0 +1,58 @@
+name: Heart disease ML pipeline
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  train:
+    runs-on: windows-latest
+    env:
+      DVC_NO_ANALYTICS: "1"
+      DVC_SITE_CACHE_DIR: ${{ runner.temp }}/dvc-site-cache
+      MLFLOW_DISABLE_AGENT_HINT: "1"
+    steps:
+      - name: Check out Git version
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install dependencies
+        shell: pwsh
+        run: |
+          python -m venv .venv
+          .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+
+      - name: Fetch DVC versioned files
+        shell: pwsh
+        run: .\.venv\Scripts\dvc.exe pull
+
+      - name: Train and log to MLflow
+        shell: pwsh
+        run: .\.venv\Scripts\dvc.exe repro --force
+
+      - name: Show metrics and prediction
+        shell: pwsh
+        run: |
+          .\.venv\Scripts\dvc.exe metrics show
+          .\.venv\Scripts\python.exe src/predict.py --model artifacts/heart_model.joblib --values 52,1,0,125,212,0,1,168,0,1,2,2,3
+
+      - name: Upload demonstration outputs
+        uses: actions/upload-artifact@v7
+        with:
+          name: heart-disease-run
+          path: |
+            metrics.json
+            dvc.lock
+            artifacts/heart_model.joblib
+            mlflow_demo.db
+            mlruns/
+          if-no-files-found: error

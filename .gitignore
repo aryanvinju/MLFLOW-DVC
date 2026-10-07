@@ -1,0 +1,11 @@
+# DVC local cache and run artifacts
+/.dvc/cache/
+/.dvc/tmp/
+/mlruns/
+/mlflow.db
+/mlflow_demo.db
+/mlartifacts/
+/.dvc/site-cache/
+/.venv/
+__pycache__/
+*.py[cod]

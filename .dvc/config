@@ -1,0 +1,5 @@
+[core]
+    analytics = false
+    remote = demo-storage
+['remote "demo-storage"']
+    url = ../demo_remote

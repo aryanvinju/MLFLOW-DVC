@@ -1,0 +1,17 @@
+stages:
+  train:
+    cmd: .venv\Scripts\python.exe src/train.py --data-path data/heart.csv --metrics-path metrics.json --model-path artifacts/heart_model.joblib
+    deps:
+      - data/heart.csv
+      - src/train.py
+    params:
+      - train.test_size
+      - train.random_state
+      - train.n_estimators
+      - train.max_depth
+      - train.min_samples_leaf
+    outs:
+      - artifacts/heart_model.joblib
+    metrics:
+      - metrics.json:
+          cache: false

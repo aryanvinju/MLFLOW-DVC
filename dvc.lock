@@ -1,0 +1,30 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: .venv\Scripts\python.exe src/train.py --data-path data/heart.csv 
+      --metrics-path metrics.json --model-path artifacts/heart_model.joblib
+    deps:
+    - path: data/heart.csv
+      hash: md5
+      md5: 6481ed154d5b8ff83d7c09007aaa6ed0
+      size: 38114
+    - path: src/train.py
+      hash: md5
+      md5: 5bc9fff8ead3eeee184258f578dbc552
+      size: 3510
+    params:
+      params.yaml:
+        train.max_depth: 8
+        train.min_samples_leaf: 2
+        train.n_estimators: 100
+        train.random_state: 42
+        train.test_size: 0.2
+    outs:
+    - path: artifacts/heart_model.joblib
+      hash: md5
+      md5: e6386c272e5f4bb37b92d126e673f39f
+      size: 541004
+    - path: metrics.json
+      hash: md5
+      md5: 7f0a92a375f4f64fa1c8e64c13f0d2ad
+      size: 111
