@@ -16,15 +16,15 @@ stages:
       params.yaml:
         train.max_depth: 8
         train.min_samples_leaf: 2
-        train.n_estimators: 100
+        train.n_estimators: 200
         train.random_state: 42
         train.test_size: 0.2
     outs:
     - path: artifacts/heart_model.joblib
       hash: md5
-      md5: e6386c272e5f4bb37b92d126e673f39f
-      size: 541004
+      md5: 11736fd10ad4673bd5ee826e91464fff
+      size: 1058764
     - path: metrics.json
       hash: md5
-      md5: 7f0a92a375f4f64fa1c8e64c13f0d2ad
-      size: 111
+      md5: b978dcaec8e40039cf7ef9e49e41932a
+      size: 126
