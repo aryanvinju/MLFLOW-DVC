@@ -13,7 +13,7 @@ jobs:
     runs-on: windows-latest
     env:
       DVC_NO_ANALYTICS: "1"
-      DVC_SITE_CACHE_DIR: ${{ runner.temp }}/dvc-site-cache
+      DVC_SITE_CACHE_DIR: .dvc/site-cache
       MLFLOW_DISABLE_AGENT_HINT: "1"
     steps:
       - name: Check out Git version
